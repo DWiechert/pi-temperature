@@ -3,7 +3,7 @@ Records and displays temperatures gathered from a Raspberry Pi. Also has some le
 
 ### Table of Contents
 [**Requirements**](#requirements)
-[**Installation**]](#installation)
+[**Installation**](#installation)
 [**LED Usage**](#led-usage)
 [**Temperature Usage**](#temperature-usage)
 
