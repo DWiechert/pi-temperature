@@ -21,8 +21,11 @@ public class LedController {
 	final GpioPinDigitalOutput myLed;
 
 	public LedController() {
+		// pi4j GPIO mappings are NOT the same as on the actual board
+		// GPIO_03 maps to GPIO_22 on the board
+		// Make sure to consult the pi4j diagram - http://pi4j.com/pins/model-b-plus.html
 		// provision gpio pins #04 as an output pin and make sure is is set to LOW at startup
-		myLed = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_17, // PIN NUMBER
+		myLed = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_03, // PIN NUMBER
 				"My LED", // PIN FRIENDLY NAME (optional)
 				PinState.LOW); // PIN STARTUP STATE (optional)
 	}
