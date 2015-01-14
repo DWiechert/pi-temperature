@@ -2,10 +2,10 @@
 Records and displays temperatures gathered from a Raspberry Pi. Also has some led functionality.
 
 ### Table of Contents
-[**Requirements](#requirements)**
-[**Installation](#installation)**
-[**LED Usage](#led-usage)**
-[**Temperature Usage](#temperature-usage)**
+**[Requirements](#requirements)**
+**[Installation](#installation)**
+**[LED Usage](#led-usage)**
+**[Temperature Usage](#temperature-usage)**
 
 ## Requirements
 * JDK 7
