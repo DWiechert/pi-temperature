@@ -1,17 +1,17 @@
 # pi-temperature
-Records and displays temperatures gathered from a Raspberry Pi. Also has some led functionality.
+*Records and displays temperatures gathered from a Raspberry Pi. Also has some led functionality.*
 
-### Table of Contents
+## Table of Contents
 * **[Requirements](#requirements)**
 * **[Installation](#installation)**
 * **[LED Usage](#led-usage)**
 * **[Temperature Usage](#temperature-usage)**
 
-## Requirements
+### Requirements
 * JDK 7
 * Maven 3
 
-## Installation
+### Installation
 1. Checkout the project:
 ```git clone https://github.com/DWiechert/pi-temperature.git```
 2. Build the project:
@@ -23,7 +23,7 @@ Records and displays temperatures gathered from a Raspberry Pi. Also has some le
 To check the installation and setup were successful, there is a `hello-world` REST endpoint to test with.
 ```curl <raspberry-pi-ip>:8080/hello-world```
 
-## LED Usage
+### LED Usage
 REST Endpoint | Return Type | Description
 --- | --- | ---
 `/led/blink` | void | Pulses the led for 1 second.
@@ -34,5 +34,5 @@ REST Endpoint | Return Type | Description
 `/led/isLow` | boolean | Returns a boolean indicating if the led is currently in the low (off) state.
 `/led/isHigh` | boolean | Returns a boolean indicating if the led is currently in the high (on) state.
 
-## Temperature Usage
+### Temperature Usage
 Coming soon.
