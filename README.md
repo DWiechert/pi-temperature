@@ -24,8 +24,6 @@ To check the installation and setup were successful, there is a `hello-world` RE
 ```curl <raspberry-pi-ip>:8080/hello-world```
 
 ### LED Usage
-Currently, all of the REST endpoints are wired through pi4j GPIO 03 which maps to board GPIO 22.
-<img src="pi_led_setup.jpg" width="1000px"/>
 REST Endpoint | Return Type | Description
 --- | --- | ---
 `/led/blink` | void | Pulses the led for 1 second.
@@ -35,6 +33,9 @@ REST Endpoint | Return Type | Description
 `/led/pinState` | PinState | Returns the current state of the led - either `LOW` or `HIGH`.
 `/led/isLow` | boolean | Returns a boolean indicating if the led is currently in the low (off) state.
 `/led/isHigh` | boolean | Returns a boolean indicating if the led is currently in the high (on) state.
+
+*Currently, all of the REST endpoints are wired through pi4j GPIO 03 which maps to board GPIO 22.*
+<img src="pi_led_setup.jpg" width="1000px"/>
 
 ### Temperature Usage
 Coming soon.
