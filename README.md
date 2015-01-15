@@ -24,6 +24,8 @@ To check the installation and setup were successful, there is a `hello-world` RE
 ```curl <raspberry-pi-ip>:8080/hello-world```
 
 ### LED Usage
+Currently, all of the REST endpoints are wired through pi4j GPIO 03 which maps to board GPIO 22.
+<img src="pi_led_setup.jpg" width="1000px"/>
 REST Endpoint | Return Type | Description
 --- | --- | ---
 `/led/blink` | void | Pulses the led for 1 second.
