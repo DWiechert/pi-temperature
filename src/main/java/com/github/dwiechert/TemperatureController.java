@@ -1,8 +1,10 @@
 package com.github.dwiechert;
 
+import java.io.File;
 import java.math.BigInteger;
 import java.util.BitSet;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,38 +16,23 @@ import com.pi4j.io.gpio.GpioPinDigitalInput;
 import com.pi4j.io.gpio.RaspiPin;
 
 @Controller
+@RequestMapping("/temperature")
 public class TemperatureController {
-	// create gpio controller instance
-	final GpioController gpio = GpioFactory.getInstance();
-	final GpioPinDigitalInput pin1;
-	final GpioPinDigitalInput pin2;
-	final GpioPinDigitalInput pin3;
-	final GpioPinDigitalInput pin4;
-	final GpioPinDigitalInput pin5;
-	final GpioPinDigitalInput pin6;
-	final GpioPinDigitalInput pin7;
-
-	public TemperatureController() {
-		pin1 = gpio.provisionDigitalInputPin(RaspiPin.GPIO_00, "pin1");
-		pin2 = gpio.provisionDigitalInputPin(RaspiPin.GPIO_02, "pin2");
-		pin3 = gpio.provisionDigitalInputPin(RaspiPin.GPIO_03, "pin3");
-		pin4 = gpio.provisionDigitalInputPin(RaspiPin.GPIO_04, "pin4");
-		pin5 = gpio.provisionDigitalInputPin(RaspiPin.GPIO_05, "pin5");
-		pin6 = gpio.provisionDigitalInputPin(RaspiPin.GPIO_06, "pin6");
-		pin7 = gpio.provisionDigitalInputPin(RaspiPin.GPIO_07, "pin7");
+	@RequestMapping(value = "/c", method = RequestMethod.GET)
+	public @ResponseBody String c() throws Exception {
+		return getTempC() + " C";
 	}
-
-	@RequestMapping(value = "/temperature", method = RequestMethod.GET)
-	public @ResponseBody long temperature() {
-		final BitSet bits = new BitSet(7);
-		if (pin1.isHigh()) bits.flip(0);
-		if (pin2.isHigh()) bits.flip(1);
-		if (pin3.isHigh()) bits.flip(2);
-		if (pin4.isHigh()) bits.flip(3);
-		if (pin5.isHigh()) bits.flip(4);
-		if (pin6.isHigh()) bits.flip(5);
-		if (pin7.isHigh()) bits.flip(6);
-		
-		return new BigInteger(bits.toByteArray()).intValue();
+	@RequestMapping(value = "/f", method = RequestMethod.GET)
+	public @ResponseBody String f() throws Exception {
+		final float c = getTempC();
+		return ((c * (9/5.0)) + 32) + " F";
+	}
+	
+	private float getTempC() throws Exception {
+		// /sys/bus/w1/devices/28-00000656edfa/w1_slave
+		final String line = FileUtils.readLines(new File("/sys/bus/w1/devices/28-00000656edfa/w1_slave")).get(1);
+		final String tempEqual = line.split(" ")[9];
+		final int temp = Integer.parseInt(tempEqual.substring(2));
+		return temp / 1000;
 	}
 }

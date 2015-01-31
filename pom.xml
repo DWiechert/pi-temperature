@@ -80,6 +80,13 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- Apache -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+
 		<!-- Testing -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
