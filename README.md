@@ -39,3 +39,4 @@ REST Endpoint | Return Type | Description
 
 ### Temperature Usage
 Coming soon.
+Follow temperature sheet - http://www.adafruit.com/datasheets/DS18B20.pdf
