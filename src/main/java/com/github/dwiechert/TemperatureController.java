@@ -1,19 +1,12 @@
 package com.github.dwiechert;
 
 import java.io.File;
-import java.math.BigInteger;
-import java.util.BitSet;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.pi4j.io.gpio.GpioController;
-import com.pi4j.io.gpio.GpioFactory;
-import com.pi4j.io.gpio.GpioPinDigitalInput;
-import com.pi4j.io.gpio.RaspiPin;
 
 @Controller
 @RequestMapping("/temperature")
