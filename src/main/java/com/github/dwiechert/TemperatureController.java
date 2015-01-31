@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class TemperatureController {
 	@RequestMapping(value = "/c", method = RequestMethod.GET)
 	public @ResponseBody String c() throws Exception {
-		return getTempC() + " C";
+		return getTempC() + "°C";
 	}
 	@RequestMapping(value = "/f", method = RequestMethod.GET)
 	public @ResponseBody String f() throws Exception {
 		final float c = getTempC();
-		return ((c * (9/5.0)) + 32) + " F";
+		return ((c * (9/5.0)) + 32) + "°F";
 	}
 	
 	private float getTempC() throws Exception {
