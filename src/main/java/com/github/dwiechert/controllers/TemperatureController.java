@@ -1,4 +1,4 @@
-package com.github.dwiechert;
+package com.github.dwiechert.controllers;
 
 import java.io.File;
 

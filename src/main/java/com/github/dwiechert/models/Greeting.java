@@ -1,4 +1,4 @@
-package com.github.dwiechert;
+package com.github.dwiechert.models;
 
 public class Greeting {
 	private final long id;
