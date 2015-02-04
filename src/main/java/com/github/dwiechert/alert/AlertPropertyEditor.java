@@ -9,7 +9,7 @@ public class AlertPropertyEditor extends PropertyEditorSupport {
 	}
 
 	@Override
-	public void setAsText(String text) throws IllegalArgumentException {
+	public void setAsText(final String text) throws IllegalArgumentException {
 		try {
 			setValue(Class.forName(text));
 		} catch (ClassNotFoundException e) {

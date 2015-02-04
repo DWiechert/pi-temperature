@@ -15,14 +15,15 @@ import com.github.dwiechert.models.Greeting;
 @Controller
 @RequestMapping("/hello-world")
 public class HelloWorldController {
-    private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
+	private static final String template = "Hello, %s!";
+	private final AtomicLong counter = new AtomicLong();
+
 	@Value("${alertClass:com.github.dwiechert.alert.impls.NoOpAlert}")
 	private Alert alert;
 
-    @RequestMapping(method=RequestMethod.GET)
-    public @ResponseBody Greeting sayHello(@RequestParam(value="name", required=false, defaultValue="Stranger") String name) {
-    	alert.alert();
-        return new Greeting(counter.incrementAndGet(), String.format(template, name));
-    }
+	@RequestMapping(method = RequestMethod.GET)
+	public @ResponseBody Greeting sayHello(@RequestParam(value = "name", required = false, defaultValue = "Stranger") String name) {
+		alert.alert();
+		return new Greeting(counter.incrementAndGet(), String.format(template, name));
+	}
 }

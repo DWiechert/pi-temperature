@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AlertEditorRegistrar implements PropertyEditorRegistrar {
 	@Override
-	public void registerCustomEditors(PropertyEditorRegistry registry) {
+	public void registerCustomEditors(final PropertyEditorRegistry registry) {
 		registry.registerCustomEditor(Alert.class, new AlertPropertyEditor());
 	}
 }
