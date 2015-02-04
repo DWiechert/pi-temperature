@@ -1,6 +1,5 @@
 package com.github.dwiechert.controllers;
 
-import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.dwiechert.RaspberryPiTemperatureRecordedConfiguration;
 import com.github.dwiechert.alert.Alert;
 import com.github.dwiechert.models.Greeting;
 
@@ -20,11 +20,11 @@ public class HelloWorldController {
 	private final AtomicLong counter = new AtomicLong();
 
 	@Autowired
-	private List<Alert> alerts;
+	private RaspberryPiTemperatureRecordedConfiguration configuration;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody Greeting sayHello(@RequestParam(value = "name", required = false, defaultValue = "Stranger") String name) {
-		for (final Alert alert : alerts) {
+		for (final Alert alert : configuration.getAlerts()) {
 			alert.alert("");
 		}
 		return new Greeting(counter.incrementAndGet(), String.format(template, name));

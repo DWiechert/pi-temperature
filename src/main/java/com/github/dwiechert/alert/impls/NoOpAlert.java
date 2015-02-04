@@ -10,7 +10,7 @@ public class NoOpAlert extends AbstractAlert {
 
 	@Override
 	public void alert(final String message) {
-		LOGGER.warn("Alert was called on the {} implementation.", NAME);
+		LOGGER.warn("Alert was called on the {} implementation. IsOn - {}.", NAME, isOn());
 	}
 
 	@Override
