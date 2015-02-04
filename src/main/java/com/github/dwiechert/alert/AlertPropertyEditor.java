@@ -2,6 +2,7 @@ package com.github.dwiechert.alert;
 
 import java.beans.PropertyEditorSupport;
 
+// FIXME: Probably don't need this class
 public class AlertPropertyEditor extends PropertyEditorSupport {
 	@Override
 	public String getAsText() {
