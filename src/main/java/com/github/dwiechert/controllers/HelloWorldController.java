@@ -1,5 +1,6 @@
 package com.github.dwiechert.controllers;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,13 @@ public class HelloWorldController {
 	private final AtomicLong counter = new AtomicLong();
 
 	@Autowired
-	private Alert alert;
+	private List<Alert> alerts;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody Greeting sayHello(@RequestParam(value = "name", required = false, defaultValue = "Stranger") String name) {
-		alert.alert();
+		for (final Alert alert : alerts) {
+			alert.alert("");
+		}
 		return new Greeting(counter.incrementAndGet(), String.format(template, name));
 	}
 }
