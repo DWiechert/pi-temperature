@@ -3,14 +3,20 @@ package com.github.dwiechert.controllers;
 import java.io.File;
 
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.dwiechert.alert.Alert;
+
 @Controller
 @RequestMapping("/temperature")
 public class TemperatureController {
+	@Value("${alertClass:com.github.dwiechert.alert.impls.NoOpAlert}")
+	private Alert alert;
+	
 	@RequestMapping(value = "/c", method = RequestMethod.GET)
 	public @ResponseBody String c() throws Exception {
 		return getTempC() + "°C";
