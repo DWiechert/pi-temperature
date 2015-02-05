@@ -14,7 +14,7 @@ public class NoOpAlert extends AbstractAlert {
 	}
 
 	@Override
-	public String name() {
+	public String getName() {
 		return NAME;
 	}
 }
