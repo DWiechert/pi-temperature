@@ -25,3 +25,9 @@ To check the installation and setup were successful, there is a `hello-world` RE
 ### Temperature Usage
 Coming soon.
 Follow temperature sheet - http://www.adafruit.com/datasheets/DS18B20.pdf
+
+```
+curl localhost:8080/alerts/list
+curl -X PUT localhost:8080/alerts/setOff/CopyOfNoOpAlert
+curl -X PUT localhost:8080/alerts/setOn/CopyOfNoOpAlert
+```
