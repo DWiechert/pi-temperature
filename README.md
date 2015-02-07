@@ -1,16 +1,16 @@
 # pi-temperature
 *Records and displays temperatures gathered from a Raspberry Pi. Also has some led functionality.*
 
-## Table of Contents
+# Table of Contents
 * **[Requirements](#requirements)**
 * **[Installation](#installation)**
 * **[Temperature Usage](#temperature-usage)**
 
-### Requirements
+## Requirements
 * JDK 7
 * Maven 3
 
-### Installation
+## Installation
 1. Checkout the project:
 ```git clone https://github.com/DWiechert/pi-temperature.git```
 2. Build the project:
@@ -22,9 +22,9 @@
 To check the installation and setup were successful, there is a `hello-world` REST endpoint to test with.
 ```curl <raspberry-pi-ip>:8080/hello-world```
 
-### Temperature Usage
-#### Alerts
-REST Endpoints
+## Temperature Usage
+### Alerts
+##### REST Endpoints
 
 Endpoint | Method | Variables | Example | Description
 --- | --- | --- | --- | ---
@@ -33,10 +33,18 @@ Endpoint | Method | Variables | Example | Description
 `/setOff/<name>` | PUT | `<name>` - The name of the alert. | `curl -X PUT localhost:8080/alerts/setOff/<name>` | Turns the specified alert off.
 `/update/<name>` | PUT | `<name>` - The name of the alert. `<message>` - The update message for the alert. | `curl -X PUT -d message="Some message" localhost:8080/alerts/update/<name>` | Updates the specified alert with the provided message.
 
-#### Sensors
+### Sensors
+##### REST Endpoints
 
+Endpoint | Method | Variables | Example | Description
+--- | --- | --- | --- | ---
+`/list` | GET | _None_ | `curl localhost:8080/sensors/list` | Returns a list of all Sensors and their information - name, serialId, tempC, tempF.
+
+##### Overrides
+
+By default, sensors are read every minute and update the alerts that are currently set on. The time between sensor reads can be overridden by providing the `sensorScanSchedule` property in the `application.properties` file. The sensor scan schedules use the [Quartz Cron Expressions](http://www.quartz-scheduler.org/documentation/quartz-2.x/tutorials/tutorial-lesson-06).
+
+Example of overridding the schedule to read every 10 seconds:
 ```
-curl localhost:8080/alerts/list
-curl -X PUT localhost:8080/alerts/setOff/CopyOfNoOpAlert
-curl -X PUT localhost:8080/alerts/setOn/CopyOfNoOpAlert
+sensorScanSchedule=0/10 * * * * ?
 ```
