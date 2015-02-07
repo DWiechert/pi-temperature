@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,6 +30,16 @@ public class AlertsController {
 		}
 		sb.append("\n").append("}");
 		return sb.toString();
+	}
+	
+	@RequestMapping(value = "/update/{name}", method = RequestMethod.PUT)
+	@ResponseStatus(value = HttpStatus.OK)
+	public void update(@PathVariable(value = "name") final String name, @RequestBody final String message) {
+		for (final Alert alert : configuration.getAlerts()) {
+			if (alert.getName().equals(name)) {
+				alert.update(message);
+			}
+		}
 	}
 
 	@RequestMapping(value = "/setOn/{name}", method = RequestMethod.PUT)
