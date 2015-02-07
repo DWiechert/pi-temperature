@@ -11,12 +11,17 @@
 * Maven 3
 
 ## Installation
-1. Checkout the project:
+1. Wire up the temperature sensors to your Raspberry Pi and run the following commands:
+```
+sudo modprobe w1-gpio
+sudo modprobe w1-therm
+```
+2. Checkout the project:
 ```git clone https://github.com/DWiechert/pi-temperature.git```
-2. Build the project:
+3. Build the project:
 ```mvn clean install -Dmaven.test.skip```
-3. SCP the built war `<project-directory>/target/pi-temperature-<version>.war` onto your Raspberry Pi.
-4. Start the war:
+4. SCP the built war `<project-directory>/target/pi-temperature-<version>.war` onto your Raspberry Pi.
+5. Start the war:
 ```sudo java -jar pi-temperature-<version>.war```
 
 To check the installation and setup were successful, there is a `hello-world` REST endpoint to test with.
