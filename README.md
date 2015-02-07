@@ -23,8 +23,17 @@ To check the installation and setup were successful, there is a `hello-world` RE
 ```curl <raspberry-pi-ip>:8080/hello-world```
 
 ### Temperature Usage
-Coming soon.
-Follow temperature sheet - http://www.adafruit.com/datasheets/DS18B20.pdf
+#### Alerts
+REST Endpoints
+
+Endpoint | Method | Variables | Example | Description
+--- | --- | --- | --- | ---
+`/list` | GET | _None_ | `curl localhost:8080/alerts/list` | Returns a list of all Alerts and their status (on or off).
+`/setOn/<name>` | PUT | `<name>` - The name of the alert. | `curl -X PUT localhost:8080/alerts/setOn/<name>` | Turns the specified alert on.
+`/setOff/<name>` | PUT | `<name>` - The name of the alert. | `curl -X PUT localhost:8080/alerts/setOff/<name>` | Turns the specified alert off.
+`/update/<name>` | PUT | `<name>` - The name of the alert. `<message>` - The update message for the alert. | `curl -X PUT -d message="Some message" localhost:8080/alerts/update/<name>` | Updates the specified alert with the provided message.
+
+#### Sensors
 
 ```
 curl localhost:8080/alerts/list
