@@ -31,16 +31,6 @@ public class AlertsController {
 		sb.append("\n").append("}");
 		return sb.toString();
 	}
-	
-	@RequestMapping(value = "/update/{name}", method = RequestMethod.PUT)
-	@ResponseStatus(value = HttpStatus.OK)
-	public void update(@PathVariable(value = "name") final String name, @RequestBody final String message) {
-		for (final Alert alert : configuration.getAlerts()) {
-			if (alert.getName().equals(name)) {
-				alert.update(message);
-			}
-		}
-	}
 
 	@RequestMapping(value = "/setOn/{name}", method = RequestMethod.PUT)
 	@ResponseStatus(value = HttpStatus.OK)
@@ -58,6 +48,16 @@ public class AlertsController {
 		for (final Alert alert : configuration.getAlerts()) {
 			if (alert.getName().equals(name)) {
 				alert.setOn(false);
+			}
+		}
+	}
+	
+	@RequestMapping(value = "/update/{name}", method = RequestMethod.PUT)
+	@ResponseStatus(value = HttpStatus.OK)
+	public void update(@PathVariable(value = "name") final String name, @RequestBody final String message) {
+		for (final Alert alert : configuration.getAlerts()) {
+			if (alert.getName().equals(name)) {
+				alert.update(message);
 			}
 		}
 	}
