@@ -25,7 +25,7 @@ public class HelloWorldController {
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody Greeting sayHello(@RequestParam(value = "name", required = false, defaultValue = "Stranger") String name) {
 		for (final Alert alert : configuration.getAlerts()) {
-			alert.alert("");
+			alert.alert(configuration.getSensors());
 		}
 		return new Greeting(counter.incrementAndGet(), String.format(template, name));
 	}
