@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -23,6 +24,7 @@ import com.github.dwiechert.models.Sensor;
 @RequestMapping("/sensors")
 public class SensorsController {
 	private static final DecimalFormat FORMAT = new DecimalFormat("#.###");
+	private static final String SENSORS_MASTER_DIRECTORY = "/sys/bus/w1/devices/w1_bus_master1/";
 
 	@Autowired
 	private RaspberryPiTemperatureRecordedConfiguration configuration;
@@ -42,17 +44,35 @@ public class SensorsController {
 
 	private List<Sensor> readSensors() throws Exception {
 		final List<Sensor> sensors = new ArrayList<>();
-		// TODO: Read how many there are on the fly
-		final String serialId = "28-00000656edfa";
-		final float tempC = readTempC("/sys/bus/w1/devices/" + serialId + "/w1_slave");
-		final float tempF = ((tempC * (9 / 5.0f)) + 32);
-		final Sensor sensor = new Sensor();
-		sensor.setTempC(Float.valueOf(FORMAT.format(tempC)));
-		sensor.setTempF(Float.valueOf(FORMAT.format(tempF)));
-		// TODO: Need to implement map of SerialID -> Name
-		sensor.setSerialId(serialId);
-		sensors.add(sensor);
-		// TODO: Loop over this part
+		for (final File file : new File(SENSORS_MASTER_DIRECTORY).listFiles()) {
+			if (!file.isDirectory()) {
+				continue;
+			}
+			
+			final String filename = file.getName();
+
+			if ("subsystem".equals(filename)) {
+				continue;
+			}
+
+			if ("driver".equals(filename)) {
+				continue;
+			}
+
+			if ("power".equals(filename)) {
+				continue;
+			}
+
+			final String serialId = filename;
+			final float tempC = readTempC(SENSORS_MASTER_DIRECTORY + serialId + "/w1_slave");
+			final float tempF = ((tempC * (9 / 5.0f)) + 32);
+			final Sensor sensor = new Sensor();
+			sensor.setTempC(Float.valueOf(FORMAT.format(tempC)));
+			sensor.setTempF(Float.valueOf(FORMAT.format(tempF)));
+			// TODO: Need to implement map of SerialID -> Name
+			sensor.setSerialId(serialId);
+			sensors.add(sensor);
+		}
 
 		return sensors;
 	}
