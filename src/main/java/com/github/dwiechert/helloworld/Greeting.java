@@ -1,4 +1,4 @@
-package com.github.dwiechert.models;
+package com.github.dwiechert.helloworld;
 
 public class Greeting {
 	private final long id;
