@@ -44,6 +44,7 @@ Endpoint | Method | Variables | Example | Description
 Endpoint | Method | Variables | Example | Description
 --- | --- | --- | --- | ---
 `/sensors/list` | GET | _None_ | `curl <raspberry-pi-ip>:8080/sensors/list` | Returns a list of all Sensors and their information - name, serialId, tempC, tempF.
+`/sensors/update/<serialId>` | PUT | `<serialId>` | `curl -X PUT -d name="Some name" <raspberry-pi-ip>:8080/sensors/update/<name>` | Updates the provided sensor with a user-friendly name.
 
 ##### Overrides
 
