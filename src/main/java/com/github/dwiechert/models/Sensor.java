@@ -1,5 +1,10 @@
 package com.github.dwiechert.models;
 
+/**
+ * Class that holds information about a sensor.
+ * 
+ * @author Dan Wiechert
+ */
 public class Sensor {
 	private String name;
 	private String serialId;

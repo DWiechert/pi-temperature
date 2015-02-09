@@ -10,6 +10,11 @@ import org.springframework.context.annotation.Configuration;
 import com.github.dwiechert.alert.Alert;
 import com.github.dwiechert.models.Sensor;
 
+/**
+ * {@link Configuration} class that holds a list of {@link Sensor}s and {@link Alert}s.
+ * 
+ * @author Dan Wiechert
+ */
 @Configuration
 public class RaspberryPiTemperatureRecordedConfiguration {
 	@Autowired
