@@ -24,7 +24,7 @@ sudo modprobe w1-therm
 5. Start the war:
 ```sudo java -jar pi-temperature-<version>.war```
 
-To check the installation and setup were successful, there is a `hello-world` REST endpoint to test with.
+To check the installation and setup were successful, there is a `hello-world` REST endpoint to test with:
 ```curl <raspberry-pi-ip>:8080/hello-world```
 
 ## Temperature Usage
