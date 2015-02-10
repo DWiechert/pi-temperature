@@ -36,6 +36,15 @@ Endpoint | Method | Variables | Example | Description
 `/sensors/list` | GET | _None_ | `curl <raspberry-pi-ip>:8080/sensors/list` | Returns a list of all Sensors and their information - name, serialId, tempC, tempF.
 `/sensors/update/<serialId>` | PUT | `<serialId>` | `curl -X PUT -d name="Some name" <raspberry-pi-ip>:8080/sensors/update/<name>` | Updates the provided sensor with a user-friendly name.
 
+##### Overrides
+
+By default, sensors are read every minute and update the alerts that are currently set on. The time between sensor reads can be overridden by providing the `sensorScanSchedule` property in the `application.properties` file. The sensor scan schedules use the [Quartz Cron Expressions](http://www.quartz-scheduler.org/documentation/quartz-2.x/tutorials/tutorial-lesson-06).
+
+Example of overridding the schedule to read every 10 seconds:
+```
+sensorScanSchedule=0/10 * * * * ?
+```
+
 ### Alerts - Currently a work in progress.
 ##### REST Endpoints
 
@@ -45,12 +54,3 @@ Endpoint | Method | Variables | Example | Description
 `/alerts/setOn/<name>` | PUT | `<name>` - The name of the alert. | `curl -X PUT <raspberry-pi-ip>:8080/alerts/setOn/<name>` | Turns the specified alert on.
 `/alerts/setOff/<name>` | PUT | `<name>` - The name of the alert. | `curl -X PUT <raspberry-pi-ip>:8080/alerts/setOff/<name>` | Turns the specified alert off.
 `/alerts/update/<name>` | PUT | `<name>` - The name of the alert. `<message>` - The update message for the alert. | `curl -X PUT -d message="Some message" <raspberry-pi-ip>:8080/alerts/update/<name>` | Updates the specified alert with the provided message.
-
-##### Overrides
-
-By default, sensors are read every minute and update the alerts that are currently set on. The time between sensor reads can be overridden by providing the `sensorScanSchedule` property in the `application.properties` file. The sensor scan schedules use the [Quartz Cron Expressions](http://www.quartz-scheduler.org/documentation/quartz-2.x/tutorials/tutorial-lesson-06).
-
-Example of overridding the schedule to read every 10 seconds:
-```
-sensorScanSchedule=0/10 * * * * ?
-```
