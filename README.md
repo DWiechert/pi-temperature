@@ -1,5 +1,5 @@
 # pi-temperature
-*Records and displays temperatures gathered from a Raspberry Pi. Also has some led functionality.*
+*Records and displays temperatures gathered from a Raspberry Pi through the use of [Vktech DS18b20](http://www.amazon.com/Vktech-DS18b20-Waterproof-Temperature-Transmitter/dp/B00CHEZ250/ref=sr_1_7?ie=UTF8&qid=1423584993&sr=8-7&keywords=raspberry+pi+temperature+sensor) temperature sensors.*
 
 # Table of Contents
 * **[Requirements](#requirements)**
