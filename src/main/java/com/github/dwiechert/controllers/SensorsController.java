@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,7 @@ import com.github.dwiechert.models.Sensor;
  * @author Dan Wiechert
  */
 @Controller
+@EnableAsync
 @EnableScheduling
 @RequestMapping("/sensors")
 public class SensorsController {

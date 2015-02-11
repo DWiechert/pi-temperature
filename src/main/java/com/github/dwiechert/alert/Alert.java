@@ -2,6 +2,8 @@ package com.github.dwiechert.alert;
 
 import java.util.List;
 
+import org.springframework.scheduling.annotation.Async;
+
 import com.github.dwiechert.models.Sensor;
 
 /**
@@ -19,6 +21,7 @@ public interface Alert {
 	 * @param sensors
 	 *            The sensors that were read.
 	 */
+	@Async
 	public void alert(List<Sensor> sensors);
 
 	/**
