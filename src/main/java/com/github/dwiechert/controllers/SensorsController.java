@@ -38,6 +38,8 @@ public class SensorsController {
 	private static final DecimalFormat FORMAT = new DecimalFormat("#.###");
 	private static final String SENSORS_MASTER_DIRECTORY = "/sys/bus/w1/devices/w1_bus_master1/";
 	private static final Map<String, String> SERIAL_NAME_MAP = new ConcurrentHashMap<>();
+	// Lock to synchronize on - http://stackoverflow.com/a/5861918/864369
+	private final Object LOCK = new Object();
 
 	@Autowired
 	private RaspberryPiTemperatureRecordedConfiguration configuration;
@@ -92,7 +94,7 @@ public class SensorsController {
 	 */
 	private List<Sensor> readSensors() throws Exception {
 		final List<Sensor> sensors = new ArrayList<>();
-		synchronized (SERIAL_NAME_MAP) {
+		synchronized (LOCK) {
 			SERIAL_NAME_MAP.clear();
 
 			for (final File file : new File(SENSORS_MASTER_DIRECTORY).listFiles()) {
