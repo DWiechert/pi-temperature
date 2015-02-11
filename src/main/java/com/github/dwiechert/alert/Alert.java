@@ -50,4 +50,11 @@ public interface Alert {
 	 * @return The alert's name.
 	 */
 	public String getName();
+
+	/**
+	 * Gets information about this alert.
+	 * 
+	 * @return The alert's information.
+	 */
+	public String getInfo();
 }

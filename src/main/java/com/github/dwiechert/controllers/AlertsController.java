@@ -1,5 +1,8 @@
 package com.github.dwiechert.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -21,8 +24,6 @@ import com.github.dwiechert.alert.Alert;
 @Controller
 @RequestMapping("/alerts")
 public class AlertsController {
-	private static final String LIST_FORMAT = "Name=%-20s InOn=%-5b";
-
 	@Autowired
 	private RaspberryPiTemperatureRecordedConfiguration configuration;
 
@@ -32,14 +33,12 @@ public class AlertsController {
 	 * @return The list of alerts.
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public @ResponseBody String listAlerts() {
-		final StringBuilder sb = new StringBuilder();
-		sb.append("{");
+	public @ResponseBody List<String> listAlerts() {
+		final List<String> alertInfos = new ArrayList<>();
 		for (final Alert alert : configuration.getAlerts()) {
-			sb.append("\n\t").append(String.format(LIST_FORMAT, alert.getName(), alert.isOn()));
+			alertInfos.add(alert.getInfo());
 		}
-		sb.append("\n").append("}");
-		return sb.toString();
+		return alertInfos;
 	}
 
 	/**
