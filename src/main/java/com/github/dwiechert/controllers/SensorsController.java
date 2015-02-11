@@ -3,6 +3,7 @@ package com.github.dwiechert.controllers;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -95,6 +96,7 @@ public class SensorsController {
 	private List<Sensor> readSensors() throws Exception {
 		final List<Sensor> sensors = new ArrayList<>();
 		synchronized (LOCK) {
+			final Map<String, String> previousMap = new HashMap<String, String>(SERIAL_NAME_MAP);
 			SERIAL_NAME_MAP.clear();
 
 			for (final File file : new File(SENSORS_MASTER_DIRECTORY).listFiles()) {
@@ -117,7 +119,7 @@ public class SensorsController {
 				}
 
 				final String serialId = filename;
-				SERIAL_NAME_MAP.put(serialId, "");
+				SERIAL_NAME_MAP.put(serialId, previousMap.containsKey(serialId) ? previousMap.get(serialId) : "");
 				final float tempC = readTempC(SENSORS_MASTER_DIRECTORY + serialId + "/w1_slave");
 				final float tempF = ((tempC * (9 / 5.0f)) + 32);
 				final Sensor sensor = new Sensor();
