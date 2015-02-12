@@ -58,16 +58,16 @@ public class SensorsController {
 	}
 
 	/**
-	 * Updates the provided sensor.
+	 * Updates the provided sensor with a user-friendly name.
 	 * 
 	 * @param serialId
 	 *            The serial id of the sensor.
 	 * @param name
 	 *            The sensor's user-friendly name.
 	 */
-	@RequestMapping(value = "/update/{serialId}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/name/{serialId}", method = RequestMethod.PUT)
 	@ResponseStatus(value = HttpStatus.OK)
-	public void update(@PathVariable(value = "serialId") final String serialId, @RequestBody final String name) {
+	public void name(@PathVariable(value = "serialId") final String serialId, @RequestBody final String name) {
 		SERIAL_NAME_MAP.put(serialId, name == null ? "" : name);
 	}
 
