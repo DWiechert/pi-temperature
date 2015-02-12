@@ -37,9 +37,27 @@ public class AlertsController {
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public @ResponseBody List<String> listAlerts() {
+		return getAlertInfos(null);
+	}
+
+	/**
+	 * Lists all of the {@link Alert}s that are known with the provided name
+	 * 
+	 * @param name
+	 *            The name of the alert.
+	 * @return The list of alerts.
+	 */
+	@RequestMapping(value = "/list/{name}", method = RequestMethod.GET)
+	public @ResponseBody List<String> listAlerts(@PathVariable(value = "name") final String name) {
+		return getAlertInfos(name == null ? "" : name);
+	}
+
+	private List<String> getAlertInfos(final String name) {
 		final List<String> alertInfos = new ArrayList<>();
 		for (final Alert alert : configuration.getAlerts()) {
-			alertInfos.add(alert.getInfo());
+			if (name == null || name.equals(alert.getName())) {
+				alertInfos.add(alert.getInfo());
+			}
 		}
 		return alertInfos;
 	}
