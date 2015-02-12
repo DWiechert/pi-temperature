@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.github.dwiechert.alert.AbstractAlert;
+import com.github.dwiechert.models.Pair;
 import com.github.dwiechert.models.Sensor;
 
 @Component
@@ -17,8 +18,9 @@ public class CopyOfNoOpAlert extends AbstractAlert {
 	}
 	
 	@Override
-	public void update(final String message) {
+	public Pair<Boolean, String> update(final String message) {
 		LOGGER.warn("Update was called on the {} implemention. Message - {}.", NAME, message);
+		return Pair.of(Boolean.TRUE, "");
 	}
 
 	@Override
