@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -37,10 +38,12 @@ import com.github.dwiechert.models.Sensor;
 @RequestMapping("/sensors")
 public class SensorsController {
 	private static final DecimalFormat FORMAT = new DecimalFormat("#.###");
-	private static final String SENSORS_MASTER_DIRECTORY = "/sys/bus/w1/devices/w1_bus_master1/";
 	private static final Map<String, String> SERIAL_NAME_MAP = new ConcurrentHashMap<>();
 	// Lock to synchronize on - http://stackoverflow.com/a/5861918/864369
 	private final Object LOCK = new Object();
+
+	@Value("${sensorsMasterDirectory:/sys/bus/w1/devices/w1_bus_master1/}")
+	private String SENSORS_MASTER_DIRECTORY;
 
 	@Autowired
 	private RaspberryPiTemperatureRecordedConfiguration configuration;
@@ -98,7 +101,7 @@ public class SensorsController {
 		synchronized (LOCK) {
 			final Map<String, String> previousMap = new HashMap<String, String>(SERIAL_NAME_MAP);
 			SERIAL_NAME_MAP.clear();
-
+			System.out.println("SENSORS_MASTER_DIRECTORY - " + SENSORS_MASTER_DIRECTORY);
 			for (final File file : new File(SENSORS_MASTER_DIRECTORY).listFiles()) {
 				if (!file.isDirectory()) {
 					continue;
@@ -120,7 +123,7 @@ public class SensorsController {
 
 				final String serialId = filename;
 				SERIAL_NAME_MAP.put(serialId, previousMap.containsKey(serialId) ? previousMap.get(serialId) : "");
-				final float tempC = readTempC(SENSORS_MASTER_DIRECTORY + serialId + "/w1_slave");
+				final float tempC = readTempC(SENSORS_MASTER_DIRECTORY + serialId + File.separatorChar + "w1_slave");
 				final float tempF = ((tempC * (9 / 5.0f)) + 32);
 				final Sensor sensor = new Sensor();
 				sensor.setTempC(Float.valueOf(FORMAT.format(tempC)));
