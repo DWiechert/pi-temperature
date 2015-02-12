@@ -38,11 +38,13 @@ Endpoint | Method | Variables | Example | Description
 
 ##### Overrides
 
-By default, sensors are read every minute and update the alerts that are currently set on. The time between sensor reads can be overridden by providing the `sensorScanSchedule` property in the `application.properties` file. The sensor scan schedules use the [Quartz Cron Expressions](http://www.quartz-scheduler.org/documentation/quartz-2.x/tutorials/tutorial-lesson-06).
-
-Example of overridding the schedule to read every 10 seconds:
+ - By default, sensors are read every minute and update the alerts that are currently set on. The time between sensor reads can be overridden by providing the `sensorScanSchedule` property in the `application.properties` file. The sensor scan schedules use the [Quartz Cron Expressions](http://www.quartz-scheduler.org/documentation/quartz-2.x/tutorials/tutorial-lesson-06). Example of overridding the schedule to read every 10 seconds:
 ```
 sensorScanSchedule=0/10 * * * * ?
+```
+ - By default, sensors are read from the directory `/sys/bus/w1/devices/w1_bus_master1/`. The sensors directory can be overridden by providing the `sensorsMasterDirectory` property in the `application.properties` file. Example of overridding the sensors directory:
+```
+sensorsMasterDirectory=S:\\sensors\\
 ```
 
 ### Alerts - Currently a work in progress.
