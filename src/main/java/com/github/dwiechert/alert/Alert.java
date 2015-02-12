@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.scheduling.annotation.Async;
 
+import com.github.dwiechert.models.Pair;
 import com.github.dwiechert.models.Sensor;
 
 /**
@@ -29,8 +30,9 @@ public interface Alert {
 	 * 
 	 * @param message
 	 *            The update message.
+	 * @return A pair of the update success and possible error message.
 	 */
-	public void update(String message);
+	public Pair<Boolean, String> update(String message);
 
 	/**
 	 * Sets this alert to the on status. When on, it will be alerted each time the sensors are read.

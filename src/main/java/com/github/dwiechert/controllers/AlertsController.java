@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.github.dwiechert.RaspberryPiTemperatureRecordedConfiguration;
 import com.github.dwiechert.alert.Alert;
+import com.github.dwiechert.models.Pair;
 
 /**
  * {@link Controller} that handles the REST endpoints for the {@link Alert}s.
@@ -80,14 +83,31 @@ public class AlertsController {
 	 *            The name of the alert.
 	 * @param message
 	 *            The alert's update message.
+	 * @return The response.
 	 */
 	@RequestMapping(value = "/update/{name}", method = RequestMethod.PUT)
-	@ResponseStatus(value = HttpStatus.OK)
-	public void update(@PathVariable(value = "name") final String name, @RequestBody final String message) {
+	@ResponseBody
+	public HttpEntity<String> update(@PathVariable(value = "name") final String name, @RequestBody final String message) {
+		final StringBuilder sb = new StringBuilder();
+		String prefix = "";
 		for (final Alert alert : configuration.getAlerts()) {
 			if (alert.getName().equals(name)) {
-				alert.update(message);
+				final Pair<Boolean, String> updateStatus = alert.update(message);
+				if (!updateStatus.getElement1()) {
+					sb.append(prefix);
+					prefix = ",";
+					sb.append(updateStatus.getElement2());
+				}
 			}
 		}
+
+		final ResponseEntity<String> response;
+		final String statuses = sb.toString();
+		if (statuses.isEmpty()) {
+			response = new ResponseEntity<String>(HttpStatus.OK);
+		} else {
+			response = new ResponseEntity<String>(statuses, HttpStatus.BAD_REQUEST);
+		}
+		return response;
 	}
 }
