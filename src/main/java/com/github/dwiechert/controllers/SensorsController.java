@@ -126,7 +126,7 @@ public class SensorsController {
 		synchronized (LOCK) {
 			final Map<String, String> previousMap = new HashMap<String, String>(SERIAL_NAME_MAP);
 			SERIAL_NAME_MAP.clear();
-			System.out.println("SENSORS_MASTER_DIRECTORY - " + SENSORS_MASTER_DIRECTORY);
+
 			for (final File file : new File(SENSORS_MASTER_DIRECTORY).listFiles()) {
 				if (!file.isDirectory()) {
 					continue;
