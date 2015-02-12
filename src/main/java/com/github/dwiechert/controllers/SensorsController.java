@@ -57,7 +57,32 @@ public class SensorsController {
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public @ResponseBody List<Sensor> list() throws Exception {
-		return readSensors();
+		return getSensors(null);
+	}
+
+	/**
+	 * Lists all of the {@link Sensor}s that have been read with the provided name.
+	 * 
+	 * @param name
+	 *            The name of the alert.
+	 * @return The list of sensors.
+	 * @throws Exception
+	 *             If there was an error reading the sensor files.
+	 */
+	@RequestMapping(value = "/list/{name}", method = RequestMethod.GET)
+	public @ResponseBody List<Sensor> list(@PathVariable(value = "name") final String name) throws Exception {
+		return getSensors(name == null ? "" : name);
+	}
+
+	private List<Sensor> getSensors(final String name) throws Exception {
+		final List<Sensor> sensors = readSensors();
+		final List<Sensor> filteredSensors = new ArrayList<>();
+		for (final Sensor sensor : sensors) {
+			if (name == null || name.equals(sensor.getName())) {
+				filteredSensors.add(sensor);
+			}
+		}
+		return filteredSensors;
 	}
 
 	/**

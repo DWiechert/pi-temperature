@@ -34,7 +34,7 @@ To check the installation and setup were successful, there is a `hello-world` RE
 Endpoint | Method | Variables | Example | Description
 --- | --- | --- | --- | ---
 `/sensors/list` | GET | _None_ | `curl <raspberry-pi-ip>:8080/sensors/list` | Returns a list of all Sensors and their information - name, serialId, tempC, tempF.
-`/sensors/name/<serialId>` | PUT | `<serialId>` | `curl -X PUT -d name="Some name" <raspberry-pi-ip>:8080/sensors/name/<name>` | Updates the provided sensor with a user-friendly name.
+`/sensors/name/<serialId>` | PUT | `<serialId>` | `curl -X PUT -d "Some name" <raspberry-pi-ip>:8080/sensors/name/<name>` | Updates the provided sensor with a user-friendly name.
 
 ##### Overrides
 
@@ -53,4 +53,4 @@ Endpoint | Method | Variables | Example | Description
 `/alerts/list` | GET | _None_ | `curl <raspberry-pi-ip>:8080/alerts/list` | Returns a list of all Alerts and their status (on or off).
 `/alerts/setOn/<name>` | PUT | `<name>` - The name of the alert. | `curl -X PUT <raspberry-pi-ip>:8080/alerts/setOn/<name>` | Turns the specified alert on.
 `/alerts/setOff/<name>` | PUT | `<name>` - The name of the alert. | `curl -X PUT <raspberry-pi-ip>:8080/alerts/setOff/<name>` | Turns the specified alert off.
-`/alerts/update/<name>` | PUT | `<name>` - The name of the alert. `<message>` - The update message for the alert. | `curl -X PUT -d message="Some message" <raspberry-pi-ip>:8080/alerts/update/<name>` | Updates the specified alert with the provided message.
+`/alerts/update/<name>` | PUT | `<name>` - The name of the alert. | `curl -X PUT -d "Some message" <raspberry-pi-ip>:8080/alerts/update/<name>` | Updates the specified alert with the provided message.
