@@ -6,10 +6,10 @@
 * **[Installation](#installation)**
 * **[Temperature Usage](#temperature-usage)**
  * **[Sensors](#sensors)**
-   * **[REST Endpoints](#rest-endpoints)**
+   * **[REST Endpoints](#rest-endpoints-sensors)**
     * **[Overrides](#overrides)**
  * **[Alerts](#alerts)**
-   * **[REST Endpoints](#rest-endpoints)**
+   * **[REST Endpoints](#rest-endpoints-alerts)**
     * **[CsvAlert](#csvalert)**
 
 ## Requirements
@@ -35,7 +35,7 @@ To check the installation and setup were successful, there is a `hello-world` RE
 
 ## Temperature Usage
 ### Sensors
-##### REST Endpoints
+##### REST Endpoints - Sensors
 
 Endpoint | Method | Variables | Example | Description
 --- | --- | --- | --- | ---
@@ -55,7 +55,7 @@ sensorsMasterDirectory=S:\\sensors\\
 ```
 
 ### Alerts
-##### REST Endpoints
+##### REST Endpoints - Alerts
 
 Endpoint | Method | Variables | Example | Description
 --- | --- | --- | --- | ---
