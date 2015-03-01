@@ -6,7 +6,11 @@
 * **[Installation](#installation)**
 * **[Temperature Usage](#temperature-usage)**
  * **[Sensors](#sensors)**
+   * **[REST Endpoints](#rest-endpoints)**
+    * **[Overrides](#overrides)**
  * **[Alerts](#alerts)**
+   * **[REST Endpoints](#rest-endpoints)**
+    * **[CsvAlert](#csvalert)**
 
 ## Requirements
 * JDK 7
