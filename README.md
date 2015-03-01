@@ -5,8 +5,8 @@
 * **[Requirements](#requirements)**
 * **[Installation](#installation)**
 * **[Temperature Usage](#temperature-usage)**
-** **[Sensors](#sensors)**
-** **[Alerts](#alerts)**
+ * **[Sensors](#sensors)**
+ * **[Alerts](#alerts)**
 
 ## Requirements
 * JDK 7
@@ -50,7 +50,7 @@ sensorScanSchedule=0/10 * * * * ?
 sensorsMasterDirectory=S:\\sensors\\
 ```
 
-### Alerts - Currently a work in progress.
+### Alerts
 ##### REST Endpoints
 
 Endpoint | Method | Variables | Example | Description
