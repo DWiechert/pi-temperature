@@ -34,6 +34,7 @@ To check the installation and setup were successful, there is a `hello-world` RE
 Endpoint | Method | Variables | Example | Description
 --- | --- | --- | --- | ---
 `/sensors/list` | GET | _None_ | `curl <raspberry-pi-ip>:8080/sensors/list` | Returns a list of all Sensors and their information - name, serialId, tempC, tempF.
+`/sensors/list/<name>` | GET | _None_ | `curl <raspberry-pi-ip>:8080/sensors/list/<name>` | Returns the specified Sensor and its information - name, serialId, tempC, tempF.
 `/sensors/name/<serialId>` | PUT | `<serialId>` | `curl -X PUT -d "Some name" <raspberry-pi-ip>:8080/sensors/name/<name>` | Updates the provided sensor with a user-friendly name.
 
 ##### Overrides
@@ -53,6 +54,21 @@ sensorsMasterDirectory=S:\\sensors\\
 Endpoint | Method | Variables | Example | Description
 --- | --- | --- | --- | ---
 `/alerts/list` | GET | _None_ | `curl <raspberry-pi-ip>:8080/alerts/list` | Returns a list of all Alerts and their status (on or off).
+`/alerts/list/<name>` | GET | _None_ | `curl <raspberry-pi-ip>:8080/alerts/list/<name>` | Returnsthe specific Alert and its status (on or off).
 `/alerts/setOn/<name>` | PUT | `<name>` - The name of the alert. | `curl -X PUT <raspberry-pi-ip>:8080/alerts/setOn/<name>` | Turns the specified alert on.
 `/alerts/setOff/<name>` | PUT | `<name>` - The name of the alert. | `curl -X PUT <raspberry-pi-ip>:8080/alerts/setOff/<name>` | Turns the specified alert off.
 `/alerts/update/<name>` | PUT | `<name>` - The name of the alert. | `curl -X PUT -d "Some message" <raspberry-pi-ip>:8080/alerts/update/<name>` | Updates the specified alert with the provided message.
+
+##### CsvAlert
+
+This alert writes the sensor data to a csv file. The alert name is `CsvAlert` and the supported update information is:
+
+Variable | Type | Default
+--- | --- | ---
+filename | String | `sensor-data.csv`
+delimiter | char | `,`
+
+An example of updating this alert to write to a file called `something.csv` with a delimiter of `@` is:
+```
+curl -X PUT -d {\"filename\":\"something.csv\",\"delimiter\":\"@\"} <raspberry-pi-ip>:8080/alerts/update/CsvAlert
+```

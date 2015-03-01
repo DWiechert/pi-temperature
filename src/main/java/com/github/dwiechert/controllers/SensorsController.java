@@ -110,7 +110,9 @@ public class SensorsController {
 	public void runAlerts() throws Exception {
 		final List<Sensor> sensors = readSensors();
 		for (final Alert alert : configuration.getAlerts()) {
-			alert.alert(sensors);
+			if (alert.isOn()) {
+				alert.alert(sensors);
+			}
 		}
 	}
 
