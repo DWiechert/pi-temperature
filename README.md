@@ -5,6 +5,8 @@
 * **[Requirements](#requirements)**
 * **[Installation](#installation)**
 * **[Temperature Usage](#temperature-usage)**
+** **[Sensors](#sensors)**
+** **[Alerts](#alerts)**
 
 ## Requirements
 * JDK 7
