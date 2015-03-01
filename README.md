@@ -35,7 +35,7 @@ To check the installation and setup were successful, there is a `hello-world` RE
 
 ## Temperature Usage
 ### Sensors
-##### REST Endpoints - Sensors
+##### REST Endpoints Sensors
 
 Endpoint | Method | Variables | Example | Description
 --- | --- | --- | --- | ---
@@ -55,7 +55,7 @@ sensorsMasterDirectory=S:\\sensors\\
 ```
 
 ### Alerts
-##### REST Endpoints - Alerts
+##### REST Endpoints Alerts
 
 Endpoint | Method | Variables | Example | Description
 --- | --- | --- | --- | ---
